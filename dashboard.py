@@ -90,9 +90,11 @@ uploaded_file = st.file_uploader("Upload your sentiment_results.csv or .xlsx fil
 if uploaded_file is not None:
     # Read uploaded file
     if uploaded_file.name.endswith(".csv"):
-        df = pd.read_csv(uploaded_file)
+        df = pd.read_csv(uploaded_file, encoding="utf-8-sig")
     else:
         df = pd.read_excel(uploaded_file)
+
+    st.write(df.columns.tolist())
 
     if {"sentiment", "score"}.issubset(df.columns):
         # --- Summary metrics ---
